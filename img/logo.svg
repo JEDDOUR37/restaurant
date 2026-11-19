@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#3a2417"/>
+      <stop offset="1" stop-color="#120b07"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0d98a"/>
+      <stop offset="1" stop-color="#b98a2e"/>
+    </linearGradient>
+    <path id="arcTop" d="M 62 200 A 138 138 0 0 1 338 200"/>
+    <path id="arcBottom" d="M 40 200 A 160 160 0 0 0 360 200"/>
+  </defs>
+  <circle cx="200" cy="200" r="190" fill="url(#bg)" stroke="url(#gold)" stroke-width="6"/>
+  <circle cx="200" cy="200" r="176" fill="none" stroke="#d8b25a" stroke-width="1.5" opacity=".7"/>
+  <circle cx="200" cy="200" r="104" fill="none" stroke="#d8b25a" stroke-width="1" opacity=".35"/>
+  <ellipse cx="200" cy="252" rx="100" ry="14" fill="#000" opacity=".4"/>
+  <path d="M104 246 Q104 228 126 228 L274 228 Q296 228 296 246 Z" fill="#a8802f"/>
+  <path d="M126 230 Q186 216 200 142 Q214 216 274 230 Z" fill="url(#gold)"/>
+  <path d="M158 222 Q184 208 194 168" fill="none" stroke="#fff6d6" stroke-width="4" stroke-linecap="round" opacity=".45"/>
+  <circle cx="200" cy="134" r="10" fill="url(#gold)"/>
+  <g fill="none" stroke="#f4ead8" stroke-width="3" stroke-linecap="round" opacity=".5">
+    <path d="M176 118 Q168 100 180 84"/>
+    <path d="M200 112 Q192 92 204 72"/>
+    <path d="M224 118 Q216 100 228 84"/>
+  </g>
+  <text x="200" y="214" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#2a1a0c" letter-spacing="1">YJ</text>
+  <text font-family="Georgia, serif" font-size="30" font-weight="bold" fill="#d8b25a" letter-spacing="5">
+    <textPath href="#arcTop" startOffset="50%" text-anchor="middle">JEDDOUR'S TABLE</textPath>
+  </text>
+  <text font-family="Georgia, serif" font-size="19" fill="#f4ead8" letter-spacing="5">
+    <textPath href="#arcBottom" startOffset="50%" text-anchor="middle">YAHYA JEDDOUR</textPath>
+  </text>
+  <circle cx="46" cy="200" r="3.5" fill="#d8b25a"/>
+  <circle cx="354" cy="200" r="3.5" fill="#d8b25a"/>
+</svg>

@@ -1,0 +1,28 @@
+html { scroll-behavior: smooth; }
+body.resto { background: #120c08; }
+.nav { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;
+  padding: .7rem 1.5rem; background: rgba(18,12,8,.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(216,178,90,.25); }
+.brand { display: flex; align-items: center; gap: .6rem; color: #d8b25a; text-decoration: none; font-size: 1.2rem; }
+.brand img { width: 44px; }
+.nav nav { display: flex; gap: 1.4rem; }
+.nav nav a { color: #f4ead8; text-decoration: none; }
+.nav nav a:hover { color: #d8b25a; }
+.hero2 { padding: 6rem 1rem 5rem; background: radial-gradient(circle at 50% 0, #4a2d1b, #120c08 70%); }
+.hero2 h1 { font-size: 3.2rem; }
+.hero2 p { margin: .8rem 0 1.6rem; opacity: .85; }
+.btn { display: inline-block; background: #d8b25a; color: #2a1a0c; padding: .8rem 1.8rem; border-radius: 30px; text-decoration: none; font-weight: bold; }
+.bloc { max-width: 1000px; margin: 0 auto; padding: 3.5rem 1rem; }
+.bloc h2, footer h2 { color: #d8b25a; font-size: 2rem; margin-bottom: 1.2rem; }
+.bloc, .offre { scroll-margin-top: 80px; }
+.tabs { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: 1rem 0 1.5rem; }
+.tab { display: flex; align-items: center; gap: .5rem; padding: .5rem .9rem; border-radius: 30px; border: 1px solid rgba(255,255,255,.2);
+  background: transparent; color: inherit; font: inherit; cursor: pointer; transition: background .3s; }
+.tab img { width: 26px; height: 18px; object-fit: cover; border-radius: 3px; }
+.tab.on { background: var(--c); border-color: var(--c); }
+.offres { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+.offre { background: #1f1510; border: 1px solid rgba(216,178,90,.25); border-radius: 14px; padding: 1.4rem; }
+.offre b { display: block; font-size: 2rem; }
+.offre h3 { color: #f0d98a; margin: .5rem 0 .3rem; }
+.offre p { opacity: .75; font-size: .92rem; }
+footer { padding: 2.5rem 1rem; border-top: 1px solid rgba(216,178,90,.25); opacity: .9; }
+footer p { margin: .3rem 0; }

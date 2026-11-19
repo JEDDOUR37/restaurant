@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script>
+// PHOTOS : 7et l'lien (https://...) wla "photos/smia.jpg" bin les guillemets ""
+// Couscous / Rfissa / Kung Pao : khlithom khawyin -> katjib tswira mn Wikimedia wla emoji
+const PHOTOS = {
+  "maroc-tajine": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYlJk4wx4VbE9yDVwoUIy3LL3YFb3irD6hOwOeLg3F4A&s=10",
+  "maroc-couscous": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8_FgVd6kEi4rVDfJBDPOvJzEAc3SFE_01zzg0pmUEQ&s=10",
+  "maroc-pastilla": "https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/e8ded3a2b2ab6c6ed8f473cea0f31287/Derivates/138554466fcdb2598ced9d26f43201ff973e3041.jpg",
+  "maroc-harira": "https://img.cuisineaz.com/660x495/2016/06/28/i74271-harira-choumicha.jpeg",
+  "maroc-tanjia": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpCmg-6APHWzc6Bh-n4cUs_moo3j1ulUBbU-8RADZiKw&s=10",
+  "maroc-rfissa": "",
+  "italie-pizza-margherita": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIans-rhbFCtNt3heiNUk2LZ9RXIqSzgRTX__GJsTGOA&s=10",
+  "italie-lasagnes": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkUrkPao5b1VThd34-mODg3WcRvt3TqCCUkBJnkgGJrU6u8bA-XJadTC0&s=10",
+  "italie-spaghetti-carbonara": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXiTR8O6wCWy7wes8s1nBc4TernA1X9-pVUEwdRtrynw&s=10",
+  "italie-tiramisu": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK2dDwYIoS6VG609Ek1McQUEFjZkDZGNy63pS2mFAQyA&s=10",
+  "france-coq-au-vin": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhk38xvXUhMjt9o_N4o991naagAIqdf5kUD2zTgB2Hdg&s=10",
+  "france-ratatouille": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9X0xU9M2FQbs-Anw7sDet7jYtqp6tFkwbLKsDOULorg&s=10",
+  "france-soupe-a-l-oignon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvIxjJf3Oz1jnPjEnFZWFx4qb5NylVdohGroBZ6ZfQ8g&s",
+  "france-crepes-suzette": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvo7UP7_NgMk7sGxVCWZsAnETBsTeJ7PVIQwx6t0eJEw&s=10",
+  "chine-canard-laque": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTptZ4XpMCt0e2f9kP-Fg8BkS_263ZxosZH-I8kaKCUmw&s=10",
+  "chine-dim-sum": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3nV-uJa-hpgD7eywpYjkfc5b5L9kw1LlmCG5cFk9vxw&s=10",
+  "chine-nouilles-sautees": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXCoGngkgd-UdTlBHidVnzTvT3MqUZmPwnQmErFefl2w&s=10",
+  "chine-poulet-kung-pao": "",
+  "japon-sushi-assortis": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSChKjIX9FbibS51Y93iKT1Zs9O2e2xqtnc6JYoWOxPSg&s=10",
+  "japon-ramen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFrqCEuQfRIUyI17Cb1QOqIKFcdbFavuzjsP6HFu8mBA&s=10",
+  "japon-tempura": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOyRSgP3gUpfrEYSTqf91Oy6795vp00MH2kcK1rnAuXA&s=10",
+  "japon-takoyaki": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhjxW7RJd18K9eZjmqDBTpmvECG5cHDu6zXenELteS5g&s=10",
+  "turquie-kebab-iskender": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaheupjA4dFhBKKajFNhCxOpDkdXc35TWXOmUZxu_Bg&s=10",
+  "turquie-pide": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRQHBM4GY5Gyw5s-AFjsmFkV5GKQ-beKeXoHWnnoaiHA&s=10",
+  "turquie-lahmacun": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFV-h9FTXJEzaeJE3hXhlYL18sV1sCTaRArACIpWOjVw&s=10",
+  "turquie-baklava": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSxmUpYfCtKO0qFfvDwFLVwFaRTY2vYoh3qNOkqjkJYw&s=10",
+  "inde-poulet-tikka-masala": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkT2tZ198ZBpbkbbENVXiNdHvdEOJGPLTLpEgEZLmQ4w&s=10",
+  "inde-biryani": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAGb4GlhonJ7KfUeJ_xEd2nEx9BJwmtQVeXysB-9weBg&s=10",
+  "inde-naan-au-fromage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXWXiTeM-42DChBQbh-k5uwUdfrdL0UtXYYjk1f_FAog&s=10",
+  "inde-samosas": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEbVgwt1i7NxK1MwTnIPJUaWTSNdp_ja4LJNXP9RydVA&s=10",
+  "mexique-tacos-al-pastor": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4zQQiqwnSEsqe5kj06sGGr-0pKF7NRKBmh2ndE5tgtg&s=10",
+  "mexique-burrito": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzHB7nIfdbAqa8Wj5wTTLOfv6tAhIGBXmAvAIPuJiUFA&s=10",
+  "mexique-guacamole": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UjFy4kCT1dprppyuyyDnoiGADYO1UUM_PfCRUqcRzQ&s=10",
+  "mexique-quesadilla": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI4dNCMwMQ48atiO7YM9vBuE301z9lGcOS8XH1jIE87Q&s=10"
+};
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeddour's Table — Restaurant</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍲%3C/text%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{min-height:100vh;font-family:Georgia,serif;color:#f4ead8;text-align:center;background:#120c08}
+h1{font-size:2.3rem;letter-spacing:2px;color:#d8b25a}
+.nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;padding:.7rem 1.5rem;background:rgba(18,12,8,.95);border-bottom:1px solid rgba(216,178,90,.25)}
+.brand{display:flex;align-items:center;gap:.6rem;color:#d8b25a;text-decoration:none;font-size:1.2rem}
+.brand svg{width:44px;height:44px}
+.nav nav{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.nav nav a{color:#f4ead8;text-decoration:none}.nav nav a:hover{color:#d8b25a}
+.hero2{padding:6rem 1rem 5rem;background:radial-gradient(circle at 50% 0,#4a2d1b,#120c08 70%)}
+.hero2 h1{font-size:3.2rem}.hero2 p{margin:.8rem 0 1.6rem;opacity:.85}
+.btn{display:inline-block;background:#d8b25a;color:#2a1a0c;padding:.8rem 1.8rem;border-radius:30px;text-decoration:none;font-weight:bold;border:0;cursor:pointer;font:inherit;font-weight:bold}
+.bloc{max-width:1000px;margin:0 auto;padding:3.5rem 1rem;scroll-margin-top:80px}
+#carte{max-width:1100px}
+.bloc h2,footer h2{color:#d8b25a;font-size:2rem;margin-bottom:1.2rem}
+.tabs{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:1rem 0 1.5rem}
+.tab{display:flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border-radius:30px;border:1px solid rgba(255,255,255,.2);background:transparent;color:inherit;font:inherit;cursor:pointer;transition:background .3s}
+.tab img{width:26px;height:18px;object-fit:cover;border-radius:3px}
+.tab.on{background:var(--c,#d8b25a);border-color:var(--c,#d8b25a)}
+.filtres{max-width:640px;margin:0 auto 1.5rem}
+#recherche{width:100%;padding:.8rem 1.2rem;border-radius:30px}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.8rem}
+.chip{padding:.4rem .9rem;border-radius:20px;border:1px solid rgba(216,178,90,.5);background:transparent;color:inherit;font:inherit;cursor:pointer}
+.chip.on{background:#d8b25a;color:#2a1a0c;font-weight:bold}
+#aucun{margin-top:1rem;opacity:.8}
+.banner{display:flex;align-items:center;gap:1.2rem;justify-content:center;padding:1.5rem;margin-bottom:1.5rem;border-radius:18px;background:linear-gradient(120deg,var(--c),#1f1510 90%);scroll-margin-top:80px}
+.banner img{width:120px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.banner h3{font-size:2.2rem;color:#fff}.banner p{opacity:.9;font-style:italic}
+.plats{display:grid;gap:1.8rem;margin:1.5rem auto}
+.plat{display:grid;grid-template-columns:1.1fr 1fr;background:#1f1510;border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;text-align:start;opacity:0;animation:up .6s forwards;animation-delay:var(--d)}
+.plat:nth-child(even) .photo{order:2}
+.photo{position:relative;min-height:320px;background:linear-gradient(135deg,var(--c),#2a170d)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo .emoji{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:6rem}
+.photo.nophoto .emoji{display:flex}
+.credit{position:absolute;right:8px;bottom:6px;font-size:.7rem;background:rgba(0,0,0,.6);padding:2px 6px;border-radius:6px}
+.heart{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:18px;cursor:pointer}
+.heart.on{color:#ff5a6e}
+.txt{padding:1.6rem;display:flex;flex-direction:column;gap:.6rem}
+.plat h3{font-size:1.7rem;color:#f0d98a}.plat p{opacity:.85}
+.story{padding:.9rem 1rem;border-inline-start:3px solid var(--c);background:rgba(255,255,255,.05);border-radius:0 10px 10px 0;font-style:italic}
+.story b{display:block;font-style:normal;color:#d8b25a;margin-bottom:.3rem}
+.types{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0}
+.type{border:1px solid rgba(216,178,90,.5);background:transparent;color:inherit;font:inherit;font-size:.9rem;padding:.4rem .8rem;border-radius:20px;cursor:pointer}
+.type small{opacity:.7;margin-inline-start:.3rem}
+.type.on{background:var(--c,#d8b25a);border-color:var(--c,#d8b25a);color:#fff}
+.bas{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+.prix{font-weight:bold;font-size:1.1rem}
+.bas button{background:var(--c,#d8b25a);color:#fff;border:0;padding:.5rem 1rem;border-radius:8px;cursor:pointer;font:inherit}
+@media(max-width:760px){.plat{grid-template-columns:1fr}.plat:nth-child(even) .photo{order:0}.photo{min-height:220px}.banner{flex-direction:column;text-align:center}}
+footer{padding:2.5rem 1rem;border-top:1px solid rgba(216,178,90,.25)}footer p{margin:.3rem 0}
+.cartbtn{background:#d8b25a;color:#2a1a0c;border:0;border-radius:20px;padding:.5rem 1rem;font:inherit;font-weight:bold;cursor:pointer}
+.drawer{position:fixed;top:0;right:0;width:min(380px,100vw);height:100%;background:#1a110c;border-left:1px solid rgba(216,178,90,.4);z-index:30;padding:1.2rem;display:flex;flex-direction:column;transform:translateX(105%);transition:transform .4s;text-align:start;overflow-y:auto}
+.drawer.open{transform:none}
+.drawer h2{color:#d8b25a;margin-bottom:.8rem;display:flex;justify-content:space-between}
+.drawer h2 button{background:none;border:0;color:#f4ead8;font-size:1.5rem;cursor:pointer}
+#lines{flex:1;min-height:60px}
+.line{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.qty button{width:26px;height:26px;border-radius:50%;border:1px solid #d8b25a;background:none;color:#f4ead8;cursor:pointer}
+.total{font-size:1.2rem;margin:.6rem 0;display:flex;justify-content:space-between}
+#recap{font-size:.9rem;opacity:.85;margin:.4rem 0}
+.row{display:flex;gap:.5rem;margin-bottom:.4rem}
+form{display:grid;gap:.6rem}
+input,select,textarea{padding:.6rem;border-radius:8px;border:1px solid rgba(216,178,90,.5);background:#120c08;color:#f4ead8;font:inherit}
+.ok{margin-top:.8rem;color:#f0d98a}
+.resa{max-width:420px;margin:0 auto}
+.steps{display:flex;gap:6px;margin:1rem 0}
+.step{flex:1;padding-top:.6rem;border-top:5px solid rgba(255,255,255,.15);font-size:.85rem;opacity:.6}
+.step.on{border-color:#d8b25a;opacity:1;font-weight:bold}
+#admin{max-width:1100px}
+.apane{overflow-x:auto;text-align:start;margin-top:1rem}
+.apane table{width:100%;border-collapse:collapse;font-size:.9rem}
+.apane th,.apane td{padding:.5rem;border-bottom:1px solid rgba(255,255,255,.12);vertical-align:top}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1rem}
+.stat{background:#1f1510;border:1px solid rgba(216,178,90,.3);border-radius:12px;padding:1rem}
+.stat b{display:block;font-size:1.6rem;color:#d8b25a}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#2a170d" stroke="#d8b25a" stroke-width="4"/><path d="M24 64Q24 53 35 53H65Q76 53 76 64Z" fill="#b5532c"/><path d="M33 53Q48 48 50 26Q52 48 67 53Z" fill="#d8b25a"/><text x="50" y="82" text-anchor="middle" font-size="14" fill="#f4ead8" font-family="Georgia">YJ</text></svg>
+    <span>Jeddour's Table</span>
+  </a>
+  <nav>
+    <a href="index.html" data-i="nav_intro">Intro</a>
+    <a href="#carte" data-i="nav_menu">Carte</a>
+    <a href="#reservation" data-i="nav_book">Réservation</a>
+    <a href="#suivi" data-i="nav_track">Suivi</a>
+    <a href="#contact" data-i="nav_contact">Contact</a>
+    <a href="#admin" id="adminBtn" data-i="nav_admin">Admin</a>
+    <select id="langSel" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option><option value="ar">AR</option></select>
+    <button class="cartbtn" id="cartBtn">🛒 <span data-i="cart">Panier</span> (<span id="count">0</span>)</button>
+  </nav>
+</header>
+
+<section class="hero2" id="top">
+  <h1>Jeddour's Table</h1>
+  <p data-i="hero_p"></p>
+  <a href="#carte" class="btn" data-i="hero_btn"></a>
+</section>
+
+<section class="bloc" id="carte">
+  <h2 data-i="menu_h"></h2>
+  <div class="tabs" id="tabs"></div>
+  <div class="filtres">
+    <input type="search" id="recherche" data-p="search">
+    <div class="chips">
+      <button class="chip on" data-f="tous" data-i="f_all"></button>
+      <button class="chip" data-f="halal" data-i="f_halal"></button>
+      <button class="chip" data-f="vege" data-i="f_vege"></button>
+      <button class="chip" data-f="sans-gluten" data-i="f_gf"></button>
+      <button class="chip" data-f="piquant" data-i="f_spicy"></button>
+      <button class="chip" data-f="fav" data-i="f_fav"></button>
+    </div>
+    <p id="aucun" hidden data-i="none"></p>
+  </div>
+  <div class="banner" id="banner"></div>
+  <div class="plats" id="plats"></div>
+</section>
+
+<section class="bloc" id="reservation">
+  <h2 data-i="book_h"></h2>
+  <form class="resa" id="resaForm">
+    <input id="rNom" data-p="name" required>
+    <input id="rTel" data-p="phone" inputmode="tel" required>
+    <input id="rDate" type="date" required>
+    <input id="rHeure" type="time" required>
+    <select id="rPers"></select>
+    <p class="ok" id="rInfo"></p>
+    <button class="btn" data-i="book_btn"></button>
+  </form>
+  <p class="ok" id="resaOk"></p>
+</section>
+
+<section class="bloc" id="suivi">
+  <h2 data-i="track_h"></h2>
+  <form class="resa" id="suiviForm">
+    <input id="sNum" placeholder="YJ-0000" required>
+    <button class="btn" data-i="track_btn"></button>
+  </form>
+  <div id="sRes"></div>
+</section>
+
+<section class="bloc" id="admin" hidden>
+  <h2>Admin</h2>
+  <div class="stats" id="a-stats"></div>
+  <h3>Commandes</h3><div class="apane" id="a-cmd"></div>
+  <h3 style="margin-top:2rem">Réservations</h3><div class="apane" id="a-res"></div>
+</section>
+
+<footer id="contact">
+  <h2 data-i="contact_h"></h2>
+  <p data-i="hours"></p><p data-i="address"></p><p data-i="tel"></p>
+</footer>
+
+<aside class="drawer" id="drawer">
+  <h2><span data-i="cart_h"></span><button id="closeCart">×</button></h2>
+  <div id="lines"></div>
+  <div class="row"><input id="promoIn" data-p="promo" style="flex:1"><button class="chip" id="promoBtn" data-i="apply"></button></div>
+  <p class="ok" id="promoMsg" style="margin:0"></p>
+  <p id="recap"></p>
+  <div class="total"><span data-i="total"></span><strong id="total">0 DH</strong></div>
+  <form id="orderForm">
+    <input id="oNom" data-p="name" required>
+    <input id="oTel" data-p="phone" inputmode="tel" required>
+    <textarea id="oAdr" data-p="addr" required rows="2"></textarea>
+    <button class="btn" data-i="order_btn"></button>
+  </form>
+  <p class="ok" id="orderOk"></p>
+</aside>
+
+<script>
+const COUNTRIES = [{"id":"maroc","nom":"Maroc","couleur":"#c1272d","slogan":"La table des mille et une saveurs","plats":[{"nom":"Tajine","slug":"tajine","emoji":"🍲","prix":90,"desc":"Mijoté lentement dans son plat en terre cuite. Choisis ta recette.","photo":"https://commons.wikimedia.org/wiki/Special:FilePath/Moroccan_lamb_with_prunes_and_apricots.jpg?width=900","histoire":"Le tajine porte le nom du plat en terre cuite à couvercle conique dans lequel il cuit. Cette forme garde la vapeur et laisse la viande mijoter doucement dans son propre jus. Le mariage sucré-salé de l'agneau et des pruneaux est un grand classique des repas de fête et des tables d'invités.","types":[{"nom":"Agneau aux pruneaux","prix":90},{"nom":"Poulet, olives et citron confit","prix":75},{"nom":"Kefta aux œufs","prix":65},{"nom":"Légumes","prix":60}]},{"nom":"Couscous","slug":"couscous","emoji":"🥘","prix":85,"desc":"Semoule vapeur et légumes de saison. Choisis ta garniture.","photo":"https://commons.wikimedia.org/wiki/Special:FilePath/MoroccanCouscous.jpg?width=900","histoire":"Le couscous est né chez les Imazighen (Berbères) d'Afrique du Nord il y a des siècles. Au Maroc, on le sert traditionnellement le vendredi, en famille, et pour les grandes occasions. En 2020, le savoir-faire du couscous a été inscrit au patrimoine culturel immatériel de l'UNESCO par le Maroc, l'Algérie, la Mauritanie et la Tunisie.","types":[{"nom":"Royal","prix":85},{"nom":"Agneau","prix":80},{"nom":"Poulet","prix":70},{"nom":"Sept légumes","prix":60}]},{"nom":"Pastilla","slug":"pastilla","emoji":"🥧","prix":70,"desc":"Feuilles de warqa croustillantes, amandes et cannelle. Choisis ta garniture.","histoire":"La pastilla est une spécialité raffinée de la cuisine marocaine, souvent associée à Fès et à l'héritage andalou. On la prépare traditionnellement avec du pigeon, aujourd'hui souvent avec du poulet. Sa surprise : le sucre et la cannelle saupoudrés sur une garniture salée.","types":[{"nom":"Poulet","prix":70},{"nom":"Viande","prix":75},{"nom":"Pigeon","prix":90},{"nom":"Fruits de mer","prix":85}]},{"nom":"Harira","slug":"harira","emoji":"🍵","prix":30,"desc":"Soupe de tomates, lentilles et pois chiches parfumée à la coriandre, servie avec des dattes.","photo":"https://commons.wikimedia.org/wiki/Special:FilePath/Harira_d%27aflou.jpg?width=900","histoire":"Le mot harira vient d'un mot arabe qui signifie « soie », à cause de la texture veloutée de la soupe. C'est le plat qui rompt le jeûne au coucher du soleil pendant le Ramadan, accompagné de dattes et de chebakia."},{"nom":"Tanjia marrakchia","slug":"tanjia","emoji":"🏺","prix":95,"desc":"Viande de bœuf confite des heures dans une jarre en terre, ail, cumin et citron confit.","histoire":"La tanjia est la spécialité de Marrakech. Elle cuit dans une jarre en terre que l'on dépose dans les braises du four du hammam. On la présente souvent comme le plat des hommes, préparé entre amis pour un déjeuner.","types":[{"nom":"Bœuf","prix":95},{"nom":"Agneau","prix":105}]},{"nom":"Rfissa","slug":"rfissa","emoji":"🍗","prix":80,"desc":"Poulet fermier, lentilles et fenugrec sur des morceaux de msemen émiettés.","photo":"https://commons.wikimedia.org/wiki/Special:FilePath/Rfissa_marocaine.jpg?width=900","histoire":"La rfissa est un plat de fête généreux, servi aux grandes occasions. On l'offre aussi aux jeunes mamans après la naissance, pour leur donner des forces."}],"code":"ma"},{"id":"italie","nom":"Italie","couleur":"#1b8a3c","slogan":"La dolce vita dans l'assiette","plats":[{"nom":"Pizza","emoji":"🍕","desc":"Pâte fine, sauce tomate et mozzarella. Choisis ta pizza.","prix":65,"slug":"pizza-margherita","types":[{"nom":"Margherita","prix":65},{"nom":"Pepperoni (bœuf)","prix":75},{"nom":"Quatre fromages","prix":80},{"nom":"Poulet","prix":75}]},{"nom":"Lasagnes","emoji":"🍝","desc":"Bolognaise maison et béchamel gratinée.","prix":75,"slug":"lasagnes","types":[{"nom":"Bœuf","prix":75},{"nom":"Poulet","prix":70},{"nom":"Végétarienne","prix":65}]},{"nom":"Spaghetti","emoji":"🍝","desc":"Pâtes al dente. Choisis ta sauce.","prix":70,"slug":"spaghetti-carbonara","types":[{"nom":"Carbonara (volaille fumée)","prix":70},{"nom":"Bolognaise","prix":70},{"nom":"Arrabbiata","prix":60}]},{"nom":"Tiramisu","emoji":"🍰","desc":"Mascarpone, café et cacao.","prix":40,"slug":"tiramisu"}],"code":"it"},{"id":"france","nom":"France","couleur":"#1e4fa3","slogan":"L'art de la grande cuisine","plats":[{"nom":"Coq au vin","emoji":"🍗","desc":"Poulet mijoté au vin rouge.","prix":110,"slug":"coq-au-vin"},{"nom":"Ratatouille","emoji":"🍆","desc":"Légumes du soleil confits.","prix":70,"slug":"ratatouille"},{"nom":"Soupe à l'oignon","emoji":"🧅","desc":"Gratinée au fromage.","prix":50,"slug":"soupe-a-l-oignon"},{"nom":"Crêpes","emoji":"🥞","desc":"Fines crêpes faites minute. Choisis ta garniture.","prix":45,"slug":"crepes-suzette","types":[{"nom":"Suzette","prix":45},{"nom":"Sucre","prix":30},{"nom":"Chocolat","prix":40},{"nom":"Confiture","prix":35}]}],"code":"fr"},{"id":"chine","nom":"Chine","couleur":"#d71920","slogan":"Mille ans de saveurs","plats":[{"nom":"Canard laqué","emoji":"🦆","desc":"Peau croustillante, crêpes et sauce hoisin.","prix":120,"slug":"canard-laque"},{"nom":"Dim Sum","emoji":"🥟","desc":"Raviolis vapeur assortis.","prix":60,"slug":"dim-sum","types":[{"nom":"Crevettes","prix":60},{"nom":"Bœuf","prix":60},{"nom":"Poulet","prix":60},{"nom":"Légumes","prix":55}]},{"nom":"Nouilles sautées","emoji":"🍜","desc":"Légumes, œuf et sauce soja.","prix":55,"slug":"nouilles-sautees","types":[{"nom":"Légumes","prix":55},{"nom":"Poulet","prix":60},{"nom":"Bœuf","prix":65},{"nom":"Crevettes","prix":70}]},{"nom":"Kung Pao","emoji":"🌶️","desc":"Piquant, cacahuètes grillées. Choisis ta viande.","prix":75,"slug":"poulet-kung-pao","types":[{"nom":"Poulet","prix":75},{"nom":"Bœuf","prix":85},{"nom":"Crevettes","prix":95}]}],"code":"cn"},{"id":"japon","nom":"Japon","couleur":"#bc002d","slogan":"La précision du goût","plats":[{"nom":"Sushi","emoji":"🍣","desc":"Riz vinaigré et poisson frais. Choisis ton poisson.","prix":100,"slug":"sushi-assortis","types":[{"nom":"Saumon","prix":100},{"nom":"Thon","prix":110},{"nom":"Crevette","prix":95},{"nom":"Assortiment","prix":120}]},{"nom":"Ramen","emoji":"🍜","desc":"Bouillon riche, nouilles et œuf mariné. Choisis ton bouillon.","prix":80,"slug":"ramen","types":[{"nom":"Shoyu (poulet)","prix":80},{"nom":"Miso","prix":80},{"nom":"Piquant (poulet)","prix":85},{"nom":"Légumes","prix":70}]},{"nom":"Tempura","emoji":"🍤","desc":"Légumes et crevettes croustillants.","prix":75,"slug":"tempura","types":[{"nom":"Crevettes","prix":75},{"nom":"Légumes","prix":60},{"nom":"Mixte","prix":80}]},{"nom":"Takoyaki","emoji":"🐙","desc":"Boulettes de poulpe grillées.","prix":55,"slug":"takoyaki"}],"code":"jp"},{"id":"turquie","nom":"Turquie","couleur":"#e30a17","slogan":"Entre Orient et Occident","plats":[{"nom":"Kebab","emoji":"🥙","desc":"Grillé, servi avec pain et yaourt. Choisis ta viande.","prix":70,"slug":"kebab-iskender","types":[{"nom":"Agneau","prix":70},{"nom":"Poulet","prix":60},{"nom":"Mixte","prix":80}]},{"nom":"Pide","emoji":"🫓","desc":"Pain en bateau garni.","prix":60,"slug":"pide","types":[{"nom":"Viande","prix":60},{"nom":"Fromage","prix":55},{"nom":"Poulet","prix":60}]},{"nom":"Lahmacun","emoji":"🍕","desc":"Pizza turque fine à la viande.","prix":55,"slug":"lahmacun","types":[{"nom":"Agneau","prix":55},{"nom":"Poulet","prix":50},{"nom":"Fromage","prix":50}]},{"nom":"Baklava","emoji":"🍯","desc":"Pistaches et miel.","prix":40,"slug":"baklava","types":[{"nom":"Pistache","prix":40},{"nom":"Noix","prix":35}]}],"code":"tr"},{"id":"inde","nom":"Inde","couleur":"#e8792b","slogan":"Un festival d'épices","plats":[{"nom":"Curry","emoji":"🍛","desc":"Sauce crémeuse aux épices. Choisis ton curry.","prix":85,"slug":"poulet-tikka-masala","types":[{"nom":"Poulet tikka masala","prix":85},{"nom":"Agneau rogan josh","prix":95},{"nom":"Paneer","prix":75}]},{"nom":"Biryani","emoji":"🍚","desc":"Riz basmati parfumé au poulet.","prix":80,"slug":"biryani","types":[{"nom":"Poulet","prix":80},{"nom":"Agneau","prix":90},{"nom":"Légumes","prix":70}]},{"nom":"Naan","emoji":"🫓","desc":"Pain cuit au tandoor. Choisis ton naan.","prix":20,"slug":"naan-au-fromage","types":[{"nom":"Nature","prix":20},{"nom":"Fromage","prix":25},{"nom":"Ail","prix":25}]},{"nom":"Samosas","emoji":"🥟","desc":"Légumes épicés, croustillants.","prix":35,"slug":"samosas","types":[{"nom":"Légumes","prix":35},{"nom":"Viande","prix":40}]}],"code":"in"},{"id":"mexique","nom":"Mexique","couleur":"#006847","slogan":"Fiesta dans l'assiette","plats":[{"nom":"Tacos","emoji":"🌮","desc":"Tortillas de maïs, coriandre et oignon. Choisis ta garniture.","prix":55,"slug":"tacos-al-pastor","types":[{"nom":"Poulet","prix":55},{"nom":"Bœuf","prix":65},{"nom":"Crevettes","prix":70},{"nom":"Végétarien","prix":50}]},{"nom":"Burrito","emoji":"🌯","desc":"Riz, haricots, poulet et fromage.","prix":65,"slug":"burrito","types":[{"nom":"Poulet","prix":65},{"nom":"Bœuf","prix":70},{"nom":"Végétarien","prix":60}]},{"nom":"Guacamole","emoji":"🥑","desc":"Avocat frais et totopos.","prix":40,"slug":"guacamole"},{"nom":"Quesadilla","emoji":"🧀","desc":"Tortilla fondante au fromage.","prix":55,"slug":"quesadilla","types":[{"nom":"Fromage","prix":55},{"nom":"Poulet","prix":60},{"nom":"Champignons","prix":55}]}],"code":"mx"}];
+
+if (typeof COUNTRIES === "undefined") { document.body.innerHTML = "<h2 style='padding:2rem'>Colle ta ligne const COUNTRIES = [...] à l'endroit B (dans le dernier script).</h2>"; throw 0; }
+
+/* ---------- Réglages ---------- */
+const WHATSAPP = "212600000000";   // ton numéro (212 + numéro sans 0)
+const ADMIN_PIN = "1234";          // code pour ouvrir l'admin
+const CAPACITE = 40;               // 10 tables x 4 personnes
+const PROMO = "YAHYA10";           // code promo -10%
+
+/* ---------- Outils ---------- */
+const $ = (s) => document.querySelector(s), $$ = (s) => [...document.querySelectorAll(s)];
+const ls = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v === null ? d : v; } catch { return d; } };
+const sv = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/* ---------- Langues (FR / EN / AR) ---------- */
+const T = {
+  fr: { nav_intro: "Intro", nav_menu: "Carte & commande", nav_book: "Réservation", nav_track: "Suivi", nav_contact: "Contact", nav_admin: "Admin", cart: "Panier",
+    hero_p: "8 cuisines du monde, une seule table.", hero_btn: "Voir le menu", menu_h: "La carte", search: "Chercher un plat...",
+    f_all: "Tous", f_halal: "Halal", f_vege: "Végétarien", f_gf: "Sans gluten", f_spicy: "Piquant 🌶️", f_fav: "Favoris ♥", none: "Aucun plat trouvé 😕",
+    add: "Ajouter", story: "Histoire", book_h: "Réservation de table", name: "Nom complet", phone: "Téléphone", book_btn: "Réserver", p1: "personne", pN: "personnes",
+    left: "Places restantes", full: "Complet à cette heure, essaie une autre.", book_ok: "Demande envoyée ✅ (en attente de confirmation)",
+    track_h: "Suivre ma commande", track_btn: "Voir le statut", nf: "Aucune commande avec ce numéro.",
+    cart_h: "Panier", empty: "Ton panier est vide 🍽️", promo: "Code promo", apply: "Appliquer", promo_ok: "Code appliqué −10% ✅", promo_bad: "Code invalide",
+    sub: "Sous-total", disc: "Promo −10%", deliv: "Livraison", free: "offerte dès 200 DH", total: "Total", addr: "Adresse de livraison", order_btn: "Valider la commande",
+    order_ok: "Commande reçue ! Numéro :", wa: "Envoyer sur WhatsApp", need: "Ajoute d'abord un plat.",
+    contact_h: "Contact", hours: "Horaires : 12h – 23h (à modifier)", address: "Adresse : à ajouter", tel: "Téléphone : à ajouter",
+    st: ["Reçue", "En préparation", "En route", "Livrée"] },
+  en: { nav_intro: "Intro", nav_menu: "Menu & order", nav_book: "Booking", nav_track: "Tracking", nav_contact: "Contact", nav_admin: "Admin", cart: "Cart",
+    hero_p: "8 world cuisines, one table.", hero_btn: "See the menu", menu_h: "The menu", search: "Search a dish...",
+    f_all: "All", f_halal: "Halal", f_vege: "Vegetarian", f_gf: "Gluten-free", f_spicy: "Spicy 🌶️", f_fav: "Favorites ♥", none: "No dish found 😕",
+    add: "Add", story: "Story", book_h: "Book a table", name: "Full name", phone: "Phone", book_btn: "Book", p1: "person", pN: "people",
+    left: "Seats left", full: "Fully booked at this time, try another.", book_ok: "Request sent ✅ (awaiting confirmation)",
+    track_h: "Track my order", track_btn: "Show status", nf: "No order with this number.",
+    cart_h: "Cart", empty: "Your cart is empty 🍽️", promo: "Promo code", apply: "Apply", promo_ok: "Code applied −10% ✅", promo_bad: "Invalid code",
+    sub: "Subtotal", disc: "Promo −10%", deliv: "Delivery", free: "free from 200 DH", total: "Total", addr: "Delivery address", order_btn: "Place order",
+    order_ok: "Order received! Number:", wa: "Send on WhatsApp", need: "Add a dish first.",
+    contact_h: "Contact", hours: "Hours: 12pm – 11pm (to edit)", address: "Address: to add", tel: "Phone: to add",
+    st: ["Received", "Preparing", "On the way", "Delivered"] },
+  ar: { nav_intro: "المقدمة", nav_menu: "القائمة والطلب", nav_book: "الحجز", nav_track: "تتبع الطلب", nav_contact: "اتصل بنا", nav_admin: "الإدارة", cart: "السلة",
+    hero_p: "8 مطابخ من العالم، مائدة واحدة.", hero_btn: "شاهد القائمة", menu_h: "القائمة", search: "ابحث عن طبق...",
+    f_all: "الكل", f_halal: "حلال", f_vege: "نباتي", f_gf: "بدون غلوتين", f_spicy: "حار 🌶️", f_fav: "المفضلة ♥", none: "لا يوجد طبق 😕",
+    add: "أضف", story: "قصة", book_h: "حجز طاولة", name: "الاسم الكامل", phone: "الهاتف", book_btn: "احجز", p1: "شخص", pN: "أشخاص",
+    left: "المقاعد المتبقية", full: "مكتمل في هذا الوقت، جرّب وقتًا آخر.", book_ok: "تم إرسال الطلب ✅ (في انتظار التأكيد)",
+    track_h: "تتبع طلبي", track_btn: "عرض الحالة", nf: "لا يوجد طلب بهذا الرقم.",
+    cart_h: "السلة", empty: "سلتك فارغة 🍽️", promo: "رمز الخصم", apply: "تطبيق", promo_ok: "تم تطبيق الخصم −10% ✅", promo_bad: "رمز غير صالح",
+    sub: "المجموع الفرعي", disc: "خصم −10%", deliv: "التوصيل", free: "مجاني ابتداءً من 200 د.م", total: "المجموع", addr: "عنوان التوصيل", order_btn: "تأكيد الطلب",
+    order_ok: "تم استلام الطلب! الرقم:", wa: "إرسال عبر واتساب", need: "أضف طبقًا أولًا.",
+    contact_h: "اتصل بنا", hours: "أوقات العمل : 12:00 – 23:00 (قابلة للتعديل)", address: "العنوان : سيضاف لاحقا", tel: "الهاتف : سيضاف لاحقا",
+    st: ["مستلم", "قيد التحضير", "في الطريق", "تم التسليم"] }
+};
+const CT = { // noms + slogans des pays (même que ton intro)
+  en: { maroc: ["Morocco", "The table of a thousand and one flavours"], italie: ["Italy", "La dolce vita on a plate"], france: ["France", "The art of fine cuisine"], chine: ["China", "A thousand years of flavour"], japon: ["Japan", "The precision of taste"], turquie: ["Turkey", "Between East and West"], inde: ["India", "A festival of spices"], mexique: ["Mexico", "Fiesta on a plate"] },
+  ar: { maroc: ["المغرب", "مائدة ألف نكهة ونكهة"], italie: ["إيطاليا", "الحياة الحلوة في طبق"], france: ["فرنسا", "فن المطبخ الراقي"], chine: ["الصين", "ألف عام من النكهات"], japon: ["اليابان", "دقة الذوق"], turquie: ["تركيا", "بين الشرق والغرب"], inde: ["الهند", "مهرجان من التوابل"], mexique: ["المكسيك", "احتفال في طبق"] }
+};
+const cname = (c) => lang === "fr" ? c.nom : CT[lang][c.id][0];
+const cslog = (c) => lang === "fr" ? c.slogan : CT[lang][c.id][1];
+
+/* ---------- Tags (halal / végé / ...) : clé = pays-slug ---------- */
+const TAGS = {
+  "maroc-tajine": "halal sans-gluten", "maroc-couscous": "halal", "maroc-pastilla": "halal", "maroc-harira": "halal", "maroc-tanjia": "halal sans-gluten", "maroc-rfissa": "halal",
+  "italie-pizza-margherita": "vege", "italie-lasagnes": "halal", "italie-spaghetti-carbonara": "halal", "italie-tiramisu": "vege",
+  "france-coq-au-vin": "", "france-ratatouille": "vege sans-gluten", "france-soupe-a-l-oignon": "vege", "france-crepes-suzette": "vege",
+  "chine-canard-laque": "halal", "chine-dim-sum": "halal", "chine-nouilles-sautees": "halal", "chine-poulet-kung-pao": "halal piquant",
+  "japon-sushi-assortis": "halal sans-gluten", "japon-ramen": "halal", "japon-tempura": "halal", "japon-takoyaki": "halal",
+  "turquie-kebab-iskender": "halal piquant sans-gluten", "turquie-pide": "halal", "turquie-lahmacun": "halal piquant", "turquie-baklava": "vege",
+  "inde-poulet-tikka-masala": "halal piquant sans-gluten", "inde-biryani": "halal piquant sans-gluten", "inde-naan-au-fromage": "vege", "inde-samosas": "vege piquant",
+  "mexique-tacos-al-pastor": "halal piquant", "mexique-burrito": "halal", "mexique-guacamole": "vege sans-gluten", "mexique-quesadilla": "vege"
+};
+
+/* ---------- État ---------- */
+let lang = "fr", current = COUNTRIES[0].id, filtre = "tous", promo = false, SR = [];
+let favs = ls("yj_favs", []);
+const cart = {};
+const PH = typeof PHOTOS !== "undefined" ? PHOTOS : {}, EM = typeof EMBEDDED !== "undefined" ? EMBEDDED : {};
+
+/* ---------- Menu ---------- */
+function renderTabs() {
+  $("#tabs").innerHTML = COUNTRIES.map((c) => `<button class="tab${c.id === current ? " on" : ""}" data-id="${c.id}"><img src="https://flagcdn.com/w80/${c.code}.png" alt=""><span>${cname(c)}</span></button>`).join("");
+}
+function loadPhoto(img, srcs) {
+  const wrap = img.parentElement; let n = 0;
+  (function next() {
+    if (n >= srcs.length) { wrap.classList.add("nophoto"); img.remove(); return; }
+    const src = srcs[n++]; img.onerror = next;
+    img.onload = () => { wrap.querySelector(".credit").hidden = !/wikimedia/.test(src); };
+    img.src = src;
+  })();
+}
+function visible(cid, p) {
+  const key = cid + "-" + p.slug, q = $("#recherche").value.trim().toLowerCase();
+  if (q && !p.nom.toLowerCase().includes(q)) return false;
+  if (filtre === "tous") return true;
+  if (filtre === "fav") return favs.includes(key);
+  return (TAGS[key] || "").split(" ").includes(filtre);
+}
+function show(id) {
+  current = id;
+  const c = COUNTRIES.find((x) => x.id === id);
+  $("#carte").style.setProperty("--c", c.couleur);
+  renderTabs();
+  $("#banner").innerHTML = `<img src="https://flagcdn.com/w320/${c.code}.png" alt=""><div><h3>${cname(c)}</h3><p>${cslog(c)}</p></div>`;
+  SR = [];
+  $("#plats").innerHTML = c.plats.map((p, i) => {
+    if (!visible(c.id, p)) return "";
+    const key = c.id + "-" + p.slug;
+    SR[i] = [PH[key], EM[key], `photos/${key}.jpg`, p.photo].filter(Boolean);
+    return `<article class="plat" style="--d:${i * 0.1}s">
+      <div class="photo"><img class="pimg" alt="${esc(p.nom)}" data-i="${i}"><span class="emoji">${p.emoji}</span><span class="credit" hidden>Photo : Wikimedia Commons</span>
+        <button class="heart${favs.includes(key) ? " on" : ""}" data-fav="${key}" aria-label="Favori">♥</button></div>
+      <div class="txt"><h3>${p.nom}</h3><p>${p.desc}</p>
+        ${p.histoire ? `<div class="story"><b>${T[lang].story}</b><p>${p.histoire}</p></div>` : ""}
+        ${p.types ? `<div class="types">${p.types.map((t, j) => `<button class="type${j ? "" : " on"}" data-t="${j}" data-p="${t.prix}">${t.nom}<small>${t.prix} DH</small></button>`).join("")}</div>` : ""}
+        <div class="bas"><span class="prix">${p.types ? p.types[0].prix : p.prix} DH</span><button data-k="${c.id}:${i}">${T[lang].add}</button></div></div>
+    </article>`;
+  }).join("");
+  $$(".pimg").forEach((img) => loadPhoto(img, SR[+img.dataset.i]));
+  $("#aucun").hidden = $("#plats").children.length > 0;
+}
+$("#tabs").addEventListener("click", (e) => { const t = e.target.closest(".tab"); if (t) show(t.dataset.id); });
+$("#recherche").addEventListener("input", () => show(current));
+$$(".chip[data-f]").forEach((c) => c.addEventListener("click", () => {
+  $$(".chip[data-f]").forEach((x) => x.classList.remove("on")); c.classList.add("on"); filtre = c.dataset.f; show(current);
+}));
+$("#plats").addEventListener("click", (e) => {
+  const h = e.target.closest(".heart");
+  if (h) { const k = h.dataset.fav; favs = favs.includes(k) ? favs.filter((x) => x !== k) : [...favs, k]; sv("yj_favs", favs); h.classList.toggle("on"); if (filtre === "fav") show(current); return; }
+  const ty = e.target.closest(".type");
+  if (ty) { const art = ty.closest(".plat"); art.querySelectorAll(".type").forEach((x) => x.classList.toggle("on", x === ty)); art.dataset.t = ty.dataset.t; art.querySelector(".prix").textContent = ty.dataset.p + " DH"; return; }
+  const b = e.target.closest("button[data-k]");
+  if (b) { const k = b.dataset.k + ":" + (b.closest(".plat").dataset.t || 0); cart[k] = (cart[k] || 0) + 1; renderCart(); $("#orderOk").innerHTML = ""; $("#drawer").classList.add("open"); }
+});
+
+/* ---------- Panier ---------- */
+function find(k) {
+  const [id, i, t] = k.split(":"), p = COUNTRIES.find((c) => c.id === id).plats[+i], ty = p.types && p.types[+t || 0];
+  return { nom: ty ? p.nom + " — " + ty.nom : p.nom, prix: ty ? ty.prix : p.prix, emoji: p.emoji };
+}
+function calc() {
+  const sous = Object.keys(cart).reduce((s, k) => s + find(k).prix * cart[k], 0);
+  const remise = promo ? Math.round(sous * 0.1) : 0;
+  const livr = sous === 0 ? 0 : (sous - remise >= 200 ? 0 : 20);
+  return { sous, remise, livr, total: sous - remise + livr };
+}
+function renderCart() {
+  const keys = Object.keys(cart), t = T[lang], r = calc();
+  $("#count").textContent = keys.reduce((n, k) => n + cart[k], 0);
+  $("#lines").innerHTML = keys.length ? keys.map((k) => { const p = find(k);
+    return `<div class="line"><div>${p.emoji} ${p.nom}<br><small>${p.prix} DH</small></div><div class="qty"><button data-k="${k}" data-d="-1">−</button> ${cart[k]} <button data-k="${k}" data-d="1">+</button></div></div>`; }).join("") : `<p>${t.empty}</p>`;
+  $("#recap").innerHTML = keys.length ? `${t.sub} : ${r.sous} DH` + (r.remise ? `<br>${t.disc} : −${r.remise} DH` : "") + `<br>${t.deliv} : ${r.livr ? r.livr + " DH" : t.free}` : "";
+  $("#total").textContent = r.total + " DH";
+}
+$("#lines").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-k]"); if (!b) return;
+  cart[b.dataset.k] += +b.dataset.d; if (cart[b.dataset.k] <= 0) delete cart[b.dataset.k]; renderCart();
+});
+$("#cartBtn").onclick = () => $("#drawer").classList.add("open");
+$("#closeCart").onclick = () => $("#drawer").classList.remove("open");
+$("#promoBtn").onclick = () => { promo = $("#promoIn").value.trim().toUpperCase() === PROMO; $("#promoMsg").textContent = promo ? T[lang].promo_ok : T[lang].promo_bad; renderCart(); };
+$("#orderForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const keys = Object.keys(cart);
+  if (!keys.length) { $("#orderOk").textContent = T[lang].need; return; }
+  const r = calc(), num = "YJ-" + Math.floor(1000 + Math.random() * 9000);
+  const lignes = keys.map((k) => ({ nom: find(k).nom, qty: cart[k], prix: find(k).prix }));
+  const o = ls("yj_orders", []);
+  o.push({ num, nom: $("#oNom").value, tel: $("#oTel").value, adr: $("#oAdr").value, total: r.total, statut: 0, date: new Date().toLocaleString("fr-FR"), lignes });
+  sv("yj_orders", o);
+  const msg = `Commande ${num}\n${$("#oNom").value} - ${$("#oTel").value}\n${$("#oAdr").value}\n` + lignes.map((l) => `${l.qty}x ${l.nom} (${l.prix} DH)`).join("\n") + `\nTotal: ${r.total} DH`;
+  $("#orderOk").innerHTML = `${T[lang].order_ok} <b>${num}</b><br><a class="btn" style="margin-top:.6rem;padding:.5rem 1rem" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}">${T[lang].wa}</a>`;
+  keys.forEach((k) => delete cart[k]); promo = false; $("#promoMsg").textContent = ""; renderCart(); e.target.reset(); renderAdmin();
+});
+
+/* ---------- Suivi ---------- */
+$("#suiviForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const o = ls("yj_orders", []).find((x) => x.num === $("#sNum").value.trim().toUpperCase());
+  $("#sRes").innerHTML = o ? `<p style="margin-top:1rem"><b>${esc(o.num)}</b> — ${o.total} DH</p><div class="steps">${T[lang].st.map((s, i) => `<div class="step${i <= o.statut ? " on" : ""}">${s}</div>`).join("")}</div>` : `<p class="ok">${T[lang].nf}</p>`;
+});
+
+/* ---------- Réservation (10 tables x 4) ---------- */
+$("#rDate").min = new Date().toISOString().slice(0, 10);
+function placesRestantes() {
+  const pris = ls("yj_resa", []).filter((r) => r.date === $("#rDate").value && r.heure === $("#rHeure").value && r.statut !== "Refusée").reduce((s, r) => s + r.pers, 0);
+  return CAPACITE - pris;
+}
+function majInfo() { $("#rInfo").textContent = $("#rDate").value && $("#rHeure").value ? `${T[lang].left} : ${placesRestantes()} / ${CAPACITE}` : ""; }
+["#rDate", "#rHeure"].forEach((s) => $(s).addEventListener("change", majInfo));
+$("#resaForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const pers = +$("#rPers").value;
+  if (pers > placesRestantes()) { $("#resaOk").textContent = T[lang].full; return; }
+  const r = ls("yj_resa", []);
+  r.push({ id: Date.now(), nom: $("#rNom").value, tel: $("#rTel").value, date: $("#rDate").value, heure: $("#rHeure").value, pers, statut: "En attente" });
+  sv("yj_resa", r);
+  $("#resaOk").textContent = `${$("#rNom").value} · ${pers} · ${$("#rDate").value} ${$("#rHeure").value} — ${T[lang].book_ok}`;
+  e.target.reset(); majInfo(); renderAdmin();
+});
+
+/* ---------- Admin (protégé par PIN) ---------- */
+$("#adminBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+  const s = $("#admin");
+  if (!s.hidden) { s.hidden = true; return; }
+  if (prompt("PIN ?") !== ADMIN_PIN) return;
+  s.hidden = false; renderAdmin(); s.scrollIntoView({ behavior: "smooth" });
+});
+function renderAdmin() {
+  const o = ls("yj_orders", []), r = ls("yj_resa", []), st = T[lang].st, compte = {};
+  o.forEach((x) => x.lignes.forEach((l) => compte[l.nom] = (compte[l.nom] || 0) + l.qty));
+  const top = Object.entries(compte).sort((a, b) => b[1] - a[1])[0];
+  $("#a-stats").innerHTML = `<div class="stat"><b>${o.length}</b>Commandes</div><div class="stat"><b>${o.reduce((s, x) => s + x.total, 0)} DH</b>Revenus</div><div class="stat"><b>${r.length}</b>Réservations</div><div class="stat"><b>${top ? esc(top[0]) : "—"}</b>Top plat</div>`;
+  $("#a-cmd").innerHTML = o.length ? "<table><tr><th>N°</th><th>Client</th><th>Détail</th><th>Total</th><th>Statut</th></tr>" + o.slice().reverse().map((x) => `<tr><td>${esc(x.num)}<br><small>${esc(x.date)}</small></td><td>${esc(x.nom)}<br>${esc(x.tel)}<br>${esc(x.adr)}</td><td>${x.lignes.map((l) => l.qty + "× " + esc(l.nom)).join("<br>")}</td><td>${x.total} DH</td><td><select data-o="${esc(x.num)}">${st.map((s, i) => `<option value="${i}"${i === x.statut ? " selected" : ""}>${s}</option>`).join("")}</select></td></tr>`).join("") + "</table>" : "<p>Aucune commande.</p>";
+  $("#a-res").innerHTML = r.length ? "<table><tr><th>Client</th><th>Date</th><th>Pers.</th><th>Statut</th><th></th></tr>" + r.slice().reverse().map((x) => `<tr><td>${esc(x.nom)}<br>${esc(x.tel)}</td><td>${esc(x.date)} ${esc(x.heure)}</td><td>${x.pers}</td><td>${x.statut}</td><td><button class="chip" data-r="${x.id}" data-s="Confirmée">✔</button> <button class="chip" data-r="${x.id}" data-s="Refusée">✖</button></td></tr>`).join("") + "</table>" : "<p>Aucune réservation.</p>";
+}
+$("#a-cmd").addEventListener("change", (e) => { if (!e.target.dataset.o) return; const o = ls("yj_orders", []), x = o.find((y) => y.num === e.target.dataset.o); if (x) x.statut = +e.target.value; sv("yj_orders", o); renderAdmin(); });
+$("#a-res").addEventListener("click", (e) => { const b = e.target.closest("[data-r]"); if (!b) return; const r = ls("yj_resa", []), x = r.find((y) => y.id === +b.dataset.r); if (x) x.statut = b.dataset.s; sv("yj_resa", r); renderAdmin(); majInfo(); });
+
+/* ---------- Langue : appliquer ---------- */
+function setLang(l) {
+  if (!T[l]) l = "fr";
+  lang = l; try { localStorage.setItem("lang", l); } catch (e) {}
+  document.documentElement.lang = l; document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+  $$("[data-i]").forEach((el) => { if (T[l][el.dataset.i] !== undefined) el.textContent = T[l][el.dataset.i]; });
+  $$("[data-p]").forEach((el) => el.placeholder = T[l][el.dataset.p]);
+  const sel = $("#rPers"), keep = sel.value || "2";
+  sel.innerHTML = [1, 2, 3, 4, 5, 6, 8].map((n) => `<option value="${n}">${n} ${n === 1 ? T[l].p1 : T[l].pN}</option>`).join(""); sel.value = keep;
+  $("#langSel").value = l;
+  show(current); renderCart(); majInfo(); renderAdmin();
+}
+$("#langSel").addEventListener("change", (e) => setLang(e.target.value));
+
+/* ---------- Démarrage ---------- */
+const params = new URLSearchParams(location.search);
+if (COUNTRIES.some((x) => x.id === params.get("c"))) current = params.get("c");
+setLang(params.get("lang") || localStorage.getItem("lang") || "fr");
+</script>
+</body>
+</html>

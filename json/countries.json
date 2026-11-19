@@ -1,0 +1,42 @@
+[
+  {"id":"maroc","nom":"Maroc","code":"ma","couleur":"#c1272d","slogan":"La table des mille et une saveurs","plats":[
+    {"nom":"Tajine d'agneau aux pruneaux","emoji":"🍲","desc":"Mijoté lentement, amandes et miel.","prix":90},
+    {"nom":"Couscous royal","emoji":"🥘","desc":"Semoule, légumes, agneau, poulet et merguez.","prix":85},
+    {"nom":"Pastilla au poulet","emoji":"🥧","desc":"Feuilletée, sucrée-salée, cannelle.","prix":70},
+    {"nom":"Harira","emoji":"🍵","desc":"Soupe traditionnelle, dattes et chebakia.","prix":30}]},
+  {"id":"italie","nom":"Italie","code":"it","couleur":"#1b8a3c","slogan":"La dolce vita dans l'assiette","plats":[
+    {"nom":"Pizza Margherita","emoji":"🍕","desc":"Tomate, mozzarella, basilic frais.","prix":65},
+    {"nom":"Lasagnes","emoji":"🍝","desc":"Bolognaise maison et béchamel gratinée.","prix":75},
+    {"nom":"Spaghetti Carbonara","emoji":"🍝","desc":"Œuf, pecorino, poivre noir.","prix":70},
+    {"nom":"Tiramisu","emoji":"🍰","desc":"Mascarpone, café et cacao.","prix":40}]},
+  {"id":"france","nom":"France","code":"fr","couleur":"#1e4fa3","slogan":"L'art de la grande cuisine","plats":[
+    {"nom":"Coq au vin","emoji":"🍗","desc":"Poulet mijoté au vin rouge.","prix":110},
+    {"nom":"Ratatouille","emoji":"🍆","desc":"Légumes du soleil confits.","prix":70},
+    {"nom":"Soupe à l'oignon","emoji":"🧅","desc":"Gratinée au fromage.","prix":50},
+    {"nom":"Crêpes Suzette","emoji":"🥞","desc":"Flambées à l'orange.","prix":45}]},
+  {"id":"chine","nom":"Chine","code":"cn","couleur":"#d71920","slogan":"Mille ans de saveurs","plats":[
+    {"nom":"Canard laqué","emoji":"🦆","desc":"Peau croustillante, crêpes et sauce hoisin.","prix":120},
+    {"nom":"Dim Sum","emoji":"🥟","desc":"Raviolis vapeur assortis.","prix":60},
+    {"nom":"Nouilles sautées","emoji":"🍜","desc":"Légumes, œuf et sauce soja.","prix":55},
+    {"nom":"Poulet Kung Pao","emoji":"🌶️","desc":"Piquant, cacahuètes grillées.","prix":75}]},
+  {"id":"japon","nom":"Japon","code":"jp","couleur":"#bc002d","slogan":"La précision du goût","plats":[
+    {"nom":"Sushi assortis","emoji":"🍣","desc":"Saumon, thon et crevette.","prix":100},
+    {"nom":"Ramen","emoji":"🍜","desc":"Bouillon riche, porc et œuf mariné.","prix":80},
+    {"nom":"Tempura","emoji":"🍤","desc":"Légumes et crevettes croustillants.","prix":75},
+    {"nom":"Takoyaki","emoji":"🐙","desc":"Boulettes de poulpe grillées.","prix":55}]},
+  {"id":"turquie","nom":"Turquie","code":"tr","couleur":"#e30a17","slogan":"Entre Orient et Occident","plats":[
+    {"nom":"Kebab Iskender","emoji":"🥙","desc":"Viande grillée, pain, yaourt et beurre.","prix":70},
+    {"nom":"Pide","emoji":"🫓","desc":"Pain en bateau garni.","prix":60},
+    {"nom":"Lahmacun","emoji":"🍕","desc":"Pizza turque fine à la viande.","prix":55},
+    {"nom":"Baklava","emoji":"🍯","desc":"Pistaches et miel.","prix":40}]},
+  {"id":"inde","nom":"Inde","code":"in","couleur":"#e8792b","slogan":"Un festival d'épices","plats":[
+    {"nom":"Poulet Tikka Masala","emoji":"🍛","desc":"Sauce crémeuse tomate-épices.","prix":85},
+    {"nom":"Biryani","emoji":"🍚","desc":"Riz basmati parfumé au poulet.","prix":80},
+    {"nom":"Naan au fromage","emoji":"🫓","desc":"Pain cuit au tandoor.","prix":25},
+    {"nom":"Samosas","emoji":"🥟","desc":"Légumes épicés, croustillants.","prix":35}]},
+  {"id":"mexique","nom":"Mexique","code":"mx","couleur":"#006847","slogan":"Fiesta dans l'assiette","plats":[
+    {"nom":"Tacos al pastor","emoji":"🌮","desc":"Porc mariné, ananas et coriandre.","prix":60},
+    {"nom":"Burrito","emoji":"🌯","desc":"Riz, haricots, poulet et fromage.","prix":65},
+    {"nom":"Guacamole","emoji":"🥑","desc":"Avocat frais et totopos.","prix":40},
+    {"nom":"Quesadilla","emoji":"🧀","desc":"Tortilla fondante au fromage.","prix":55}]}
+]

@@ -85,3 +85,15 @@ main { position: relative; z-index: 2; min-height: calc(100vh - 4.5rem); display
 @keyframes pop { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01s !important; animation-delay: 0s !important; } }
 .tagine, .hint { cursor: pointer; }
+.drinks-title { margin: 24px 0 10px; color: #d4a537; }
+.drinks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.drink-card { background: rgba(255,255,255,.06); border: 1px solid rgba(212,165,55,.3); border-radius: 14px; padding: 14px; text-align: center; transition: transform .2s; }
+.drink-card:hover { transform: translateY(-4px); }
+.drink-emoji { font-size: 34px; }
+.drink-name { font-weight: 600; margin: 6px 0; }
+.drink-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+.drink-price { color: #d4a537; font-weight: 700; }
+.drink-add { background: #d4a537; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 18px; cursor: pointer; }
+.allergens { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; justify-content: center; }
+.allergen { font-size: 11px; background: rgba(255,80,80,.15); border: 1px solid rgba(255,80,80,.4); border-radius: 10px; padding: 2px 7px;
+.wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,.4); z-index: 999; } }
